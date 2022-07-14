@@ -1,0 +1,64 @@
+package com.example.pgm8phone;
+import androidx.appcompat.app.AppCompatActivity;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+public class MainActivity extends AppCompatActivity {
+ EditText etPhoneNum;
+ Button btnOne;
+ @Override
+ protected void onCreate(Bundle savedInstanceState) {
+ super.onCreate(savedInstanceState);
+ setContentView(R.layout.activity_main);
+
+etPhoneNum=findViewById(R.id.et_PhoneNum)
+;
+ }
+
+public void editPhoneNumber(View view) {
+ Button btn=(Button) view;
+ String
+btnDigit=btn.getText().toString();
+ String
+phoneNum=etPhoneNum.getText().toString();
+
+etPhoneNum.setText(phoneNum+btnDigit);
+ }
+
+public void delPhoneNum(View view) {
+ String
+modNum=etPhoneNum.getText().toString();
+
+modNum=modNum.substring(0,modNum.length()
+-1);
+3
+ etPhoneNum.setText(modNum);
+ }
+
+public void callPhoneNum(View view) {
+ String
+phoneNum=etPhoneNum.getText().toString();
+ Intent i=new
+Intent(Intent.ACTION_DIAL);
+
+i.setData(Uri.parse("tel:"+phoneNum));
+ startActivity(i);
+ }
+ public void savePhoneNum(View view) {
+ String
+phoneNum=etPhoneNum.getText().toString();
+ Intent i=new
+Intent(Intent.ACTION_INSERT);
+
+i.setType(ContactsContract.Contacts.CONTE
+NT_TYPE);
+
+i.putExtra(ContactsContract.Intents.Inser
+t.PHONE,phoneNum);
+ startActivity(i);
+ }
+}
